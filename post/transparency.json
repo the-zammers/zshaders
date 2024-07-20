@@ -64,11 +64,6 @@
         {
             "name": "kuwahara",
             "intarget": "swap",
-            "outtarget": "final"
-        },
-        {
-            "name": "blit",
-            "intarget": "final",
             "outtarget": "minecraft:main"
         }
     ]
