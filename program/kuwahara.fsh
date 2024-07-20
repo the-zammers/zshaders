@@ -12,62 +12,46 @@ out vec4 fragColor;
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 vec2 texelSize = vec2(1.0 / InSize.x, 1.0 / InSize.y);
 
-
-int getOctant(int x, int y) {
-	if(0 <= y && y <= x) return 0;
-	else if(0 <=  x &&  x <=  y) return 1;
-	else if(0 <= -x && -x <=  y) return 2;
-	else if(0 <=  y &&  y <= -x) return 3;
-	else if(0 <= -y && -y <= -x) return 4;
-	else if(0 <= -x && -x <= -y) return 5;
-	else if(0 <=  x &&  x <= -y) return 6;
-	else if(0 <= -y && -y <=  x) return 7;
+float luminance(vec3 color) {
+    return max(0.00001, dot(color, vec3(0.2127, 0.7152, 0.0722)));
 }
 
-vec3 getOctantMean(int octant) {
-	vec3 acc = vec3(0);
-	int samples = 0;
-	for(int y = -RADIUS; y<=RADIUS; y++) {
-		for(int x = -RADIUS; x<=RADIUS; x++) {
-			vec3 curr = texture(DiffuseSampler, texCoord + vec2(texelSize.x * x, texelSize.y * y)).rgb;
-			if(getOctant(x,y) == octant && x*x + y*y <= RADIUS*RADIUS) {
-				samples++;
-				acc += curr;
-			}
-		}
-	}
-	return acc / float(samples);
-}
+vec4 getQuadrant(int minx, int maxx, int miny, int maxy, float n) {
+    float luminanceSum = 0.0;
+    float luminanceSum2 = 0.0;
+    vec3 colSum = vec3(0.0);
 
-float getOctantStd(int octant, vec3 mean) {
-	vec3 acc = vec3(0);
-	int samples = 0;
-	for(int y = -RADIUS; y<=RADIUS; y++) {
-		for(int x = -RADIUS; x<=RADIUS; x++) {
-			vec3 curr = texture(DiffuseSampler, texCoord + vec2(texelSize.x * x, texelSize.y * y)).rgb;
-			if(getOctant(x,y) == octant && x*x + y*y <= RADIUS*RADIUS) {
-				samples++;
-				acc += (curr - mean) * (curr - mean);
-			}
-		}
-	}
-	acc = sqrt(acc/float(samples));
-	return acc.r * acc.g * acc.b;
+    for(int x = minx; x <= maxx; x++) {
+        for(int y = miny; y <= maxy; y++) {
+            vec3 c = texture(DiffuseSampler, texCoord + vec2(texelSize.x * x, texelSize.y * y)).rgb;
+            float l = luminance(c);
+            luminanceSum += l;
+            luminanceSum2 += l * l;
+            colSum += c;
+        }
+    }
+
+    float mean = luminanceSum / n;
+    float std = abs(luminanceSum2 / n - mean*mean);
+    return vec4(colSum / n, std);
 }
 
 void main() {
-    float minStd = 10000000000.0;
-	vec3 col = vec3(0);
-	vec3 currMean;
-	float currStd;
-	for(int i=0; i<8; i++) {
-		currMean = getOctantMean(i);
-		currStd = getOctantStd(i, currMean);
-		if(currStd<minStd) {
-			minStd = currStd;
-			col = currMean;
-		}
-	}
-	
-	fragColor = vec4(col.rgb, 1.0);
+    int numSamples = (RADIUS + 1) * (RADIUS + 1);
+
+    vec4 qs[4];
+    qs[0] = getQuadrant(-RADIUS, 0, -RADIUS, 0, numSamples);
+    qs[1] = getQuadrant(0, RADIUS, -RADIUS, 0, numSamples);
+    qs[2] = getQuadrant(0, RADIUS, 0, RADIUS, numSamples);
+    qs[3] = getQuadrant(-RADIUS, 0, 0, RADIUS, numSamples);
+
+    float lowestStd = qs[0].a;
+    vec3 color = qs[0].rgb;
+    for(int i=1; i<4; i++) {
+        if(qs[i].a < lowestStd) {
+            lowestStd = qs[i].a;
+            color = qs[i].rgb;
+        }
+    }
+    fragColor = vec4(color, 1.0);
 }
