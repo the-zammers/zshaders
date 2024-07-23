@@ -61,9 +61,18 @@
             ]
         },
         {
-            "name": "kuwahara",
+            "name": "ascii",
             "intarget": "final",
-            "outtarget": "minecraft:main"
+            "outtarget": "minecraft:main",
+            "auxtargets":  [
+                {
+                    "name": "textData",
+                    "id": "text",
+                    "width": 1024,
+                    "height": 1024,
+                    "bilinear": true
+                }
+            ]
         }
     ]
 }
