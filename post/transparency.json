@@ -6,13 +6,14 @@
         "particles",
         "clouds",
         "weather",
+        "swap",
         "final"
     ],
     "passes": [
         {
             "name": "transparency",
             "intarget": "minecraft:main",
-            "outtarget": "final",
+            "outtarget": "swap",
             "auxtargets": [
                 {
                     "name": "DiffuseDepthSampler",
@@ -58,6 +59,16 @@
                     "name": "WeatherDepthSampler",
                     "id": "weather:depth"
                 }
+            ]
+        },
+        {
+            "name": "bits",
+            "intarget": "swap",
+            "outtarget": "final",
+            "uniforms": [
+                { "name": "Resolution", "type": "float", "count": 1, "values": [ 100.0 ] },
+                { "name": "Saturation", "type": "float", "count": 1, "values": [ 1.0 ] },
+                { "name": "MosaicSize", "type": "float", "count": 1, "values": [ 8.0 ] }
             ]
         },
         {

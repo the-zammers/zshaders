@@ -127,38 +127,7 @@ out vec4 fragColor;
 // ======  end  ======
 
 
-makeStr(line0) _T _h _e __ _F _i _t _n _e _s _s _G _r _a _m __ _P _a _c _e _r __ _T _e _s _t __ _i _s __ _a __ _m _u _l _t _i _s _t _a _g _e __ _end
-makeStr(line1) _a _e _r _o _b _i _c __ _c _a _p _a _c _i _t _y __ _t _e _s _t __ _t _h _a _t __ _p _r _o _g _r _e _s _s _i _v _e _l _y __ _g _e _t _s __ _end
-makeStr(line2) _m _o _r _e __ _d _i _f _f _i _c _u _l _t __ _a _s __ _i _t __ _c _o _n _t _i _n _u _e _s _DOT __ _T _h _e __ _2 _0 __ _m _e _t _e _r __ _end
-makeStr(line3) _p _a _c _e _r __ _t _e _s _t __ _w _i _l _l __ _b _e _g _i _n __ _i _n __ _3 _0 __ _s _e _c _o _n _d _s _DOT __ _L _i _n _e __ _u _p __ _end
-makeStr(line4) _a _t __ _t _h _e __ _s _t _a _r _t _DOT __ _T _h _e __ _r _u _n _n _i _n _g __ _s _p _e _e _d __ _s _t _a _r _t _s __ _s _l _o _w _l _y _COM __ _end
-makeStr(line5) _b _u _t __ _g _e _t _s __ _f _a _s _t _e _r __ _e _a _c _h __ _m _i _n _u _t _e __ _a _f _t _e _r __ _y _o _u __ _h _e _a _r __ _end
-makeStr(line6) _t _h _i _s __ _s _i _g _n _a _l _DOT __ _LBR _b _e _e _p _RBR __ _A __ _s _i _n _g _l _e __ _l _a _p __ _s _h _o _u _l _d __ _b _e __ _end
-makeStr(line7) _c _o _m _p _l _e _t _e _d __ _e _a _c _h __ _t _i _m _e __ _y _o _u __ _h _e _a _r __ _t _h _i _s __ _s _o _u _n _d _DOT _LBR _d _i _n _g _RBR __ _end
-makeStr(line8) _R _e _m _e _m _b _e _r __ _t _o __ _r _u _n __ _i _n __ _a __ _s _t _r _a _i _g _h _t __ _l _i _n _e _COM __ _a _n _d __ _r _u _n __ _a _s __ _end
-makeStr(line9) _l _o _n _g __ _a _s __ _p _o _s _s _i _b _l _e _DOT __ _T _h _e __ _s _e _c _o _n _d __ _t _i _m _e __ _y _o _u __ _f _a _i _l __ _t _o __ _end
-makeStr(lineA) _c _o _m _p _l _e _t _e __ _a __ _l _a _p __ _b _e _f _o _r _e __ _t _h _e __ _s _o _u _n _d _COM __ _y _o _u _r __ _t _e _s _t __ _i _s __ _end
-/*_o _v _e _r _DOT __ _T _h _e __ _t _e _s _t __ _w _i _l _l __ _b _e _g _i _n __ _o _n __ _t _h _e __ _w _o _r _d __ _s _t _a _r _t _DOT __ _O _n __ _y _o _u _r __ _m _a _r _k _COM __ _g _e _t __ _r _e _a _d _y _COM __ _s _t _a _r _t _DOT _end
-*/
 
 void main() {
-    vec3 col = vec3(0);
-    vec2 uv = texCoord;
-
-    uv.y -= .9;
-    uv = uv * .8 - vec2(.02, .0);
-
-    col += vec3( 1,.3,.4) * line0(uv);
-    col += vec3(.5, 1, 1) * line1(uv + vec2(0, 0.07));
-    col += vec3( 1, 1,.4) * line2(uv + vec2(0, 0.14));
-    col += vec3( 1,.3,.4) * line3(uv + vec2(0, 0.21));
-    col += vec3(.5, 1, 1) * line4(uv + vec2(0, 0.28));
-    col += vec3( 1, 1,.4) * line5(uv + vec2(0, 0.35));
-    col += vec3( 1,.3,.4) * line6(uv + vec2(0, 0.42));
-    col += vec3(.5, 1, 1) * line7(uv + vec2(0, 0.49));
-    col += vec3( 1, 1,.4) * line8(uv + vec2(0, 0.56));
-    col += vec3( 1,.3,.4) * line9(uv + vec2(0, 0.63));
-    col += vec3(.5, 1, 1) * lineA(uv + vec2(0, 0.70));
-
-    fragColor = vec4(col, 1.0);
+    fragColor = vec4(texture(DiffuseSampler, texCoord).rgb, 1.0);
 }
