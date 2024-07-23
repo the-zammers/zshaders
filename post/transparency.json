@@ -6,14 +6,13 @@
         "particles",
         "clouds",
         "weather",
-        "swap",
         "final"
     ],
     "passes": [
         {
             "name": "transparency",
             "intarget": "minecraft:main",
-            "outtarget": "swap",
+            "outtarget": "final",
             "auxtargets": [
                 {
                     "name": "DiffuseDepthSampler",
@@ -63,7 +62,7 @@
         },
         {
             "name": "kuwahara",
-            "intarget": "swap",
+            "intarget": "final",
             "outtarget": "minecraft:main"
         }
     ]
