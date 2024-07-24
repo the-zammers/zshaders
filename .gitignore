@@ -1,4 +1,5 @@
 *
 
-!zshaders/*
+!zshaders-ascii/*
+!zshaders-kuwahara/*
 !.gitignore
