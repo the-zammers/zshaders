@@ -66,22 +66,30 @@
             "intarget": "swap",
             "outtarget": "final",
             "uniforms": [
-                { "name": "RescaleFactor", "type": "float", "count": 1, "values": [ 8.0 ] }
+                { "name": "RescaleFactor", "type": "float", "count": 2, "values": [ 6.0, 8.0 ] }
             ]
         },
         {
-            "name": "ascii",
+            "name": "asciifill",
             "intarget": "final",
-            "outtarget": "minecraft:main",
+            "outtarget": "swap",
+            "uniforms": [
+                { "name": "RescaleFactor", "type": "float", "count": 2,  "values": [ 6.0, 8.0 ] }
+            ],
             "auxtargets":  [
                 {
                     "name": "textData",
-                    "id": "text",
+                    "id": "ascii",
                     "width": 1024,
                     "height": 1024,
                     "bilinear": true
                 }
             ]
+        },
+        {
+            "name": "blit",
+            "intarget": "swap",
+            "outtarget": "minecraft:main"
         }
     ]
 }

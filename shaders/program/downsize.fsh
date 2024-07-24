@@ -6,7 +6,7 @@ in vec2 texCoord;
 in vec2 oneTexel;
 
 uniform vec2 InSize;
-uniform float RescaleFactor;
+uniform vec2 RescaleFactor;
 
 out vec4 fragColor;
 
@@ -16,8 +16,8 @@ vec3 getAverageColor(vec2 start) {
     float b = 0;
     int n   = 0;
     
-    for(int x = 0; x < RescaleFactor; x++) {
-        for(int y = 0; y < RescaleFactor; y++) {
+    for(int x = 0; x < RescaleFactor.x; x++) {
+        for(int y = 0; y < RescaleFactor.y; y++) {
             vec3 curr = texture(DiffuseSampler, start + vec2(x, y) * oneTexel).rgb;
             r += curr.r * curr.r;
             g += curr.g * curr.g;

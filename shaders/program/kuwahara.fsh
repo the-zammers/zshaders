@@ -11,7 +11,7 @@ out vec4 fragColor;
 #define RADIUS 5
 #define SECTORS 8
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
-#define TWOPI = 6.28318530718;
+#define TWOPI 6.28318530718
 vec2 texelSize = vec2(1.0 / InSize.x, 1.0 / InSize.y);
 
 float luminance(vec3 color) {
