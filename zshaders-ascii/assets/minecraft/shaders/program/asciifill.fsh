@@ -19,11 +19,10 @@ const ivec2 symbolLocations[10] = ivec2[](ivec2(0,0), ivec2(2, 14), ivec2(3, 11)
 
 void main() {
     vec2 rescaledInSize = InSize / RescaleFactor;
-    vec2 rescaledTexCoord = floor(texCoord * rescaledInSize) / rescaledInSize;
     vec2 fractOffset = fract(texCoord * rescaledInSize) * RescaleFactor;
     vec2 metapixelOffset = vec2(fractOffset.x / 8., 1. - fractOffset.y / 8.);
 
-    vec4 color = texture(DiffuseSampler, rescaledTexCoord) * 1.4;
+    vec4 color = texture(DiffuseSampler, texCoord) * 1.4;
 
     float relativeBrightness = luminance(color.rgb);
     int symbolIndex = max(0, min(9, int(relativeBrightness * 10)));
