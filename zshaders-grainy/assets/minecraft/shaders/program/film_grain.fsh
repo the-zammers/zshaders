@@ -9,7 +9,7 @@ uniform float Time;
 
 out vec4 fragColor;
 
-const float noiseStrength = 30.0; // The strength of the noise effect
+// based on the work of mattdesl and hughsk on GitHub
 
 vec3 mod289(vec3 x)
 {
