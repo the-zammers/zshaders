@@ -14,34 +14,28 @@ out vec4 fragColor;
 
 // Based on the work by Forceflow on Shadertoy
 
-float intensity(vec3 color){
-	return sqrt(dot(color, color));
-}
-
-float getIntensity(vec2 offset) {
-    return intensity(texture(DiffuseSampler, texCoord + offset * oneTexel).rgb);
+float getIntensityAt(vec2 offset) {
+    return length(texture(DiffuseSampler, texCoord + offset * oneTexel).rgb);
 }
 
 void main(){
     // samples
-    float tleft  = getIntensity(vec2(-1., -1.));
-    float left   = getIntensity(vec2(-1.,  0.));
-    float bleft  = getIntensity(vec2(-1.,  1.));
-    float top    = getIntensity(vec2( 0., -1.));
-    float bottom = getIntensity(vec2( 0.,  1.));
-    float tright = getIntensity(vec2( 1., -1.));
-    float right  = getIntensity(vec2( 1.,  0.));
-    float bright = getIntensity(vec2( 1.,  1.));
+    float tleft  = getIntensityAt(vec2(-1., -1.));
+    float left   = getIntensityAt(vec2(-1.,  0.));
+    float bleft  = getIntensityAt(vec2(-1.,  1.));
+    float top    = getIntensityAt(vec2( 0., -1.));
+    float bottom = getIntensityAt(vec2( 0.,  1.));
+    float tright = getIntensityAt(vec2( 1., -1.));
+    float right  = getIntensityAt(vec2( 1.,  0.));
+    float bright = getIntensityAt(vec2( 1.,  1.));
 
     #if OPERATOR==0
-    float x = tleft + 2.*left + bleft - tright - 2.*right - bright;
-    float y = -tleft - 2.*top - tright + bleft + 2. * bottom + bright;
+    vec2 g = vec2( tleft + 2.*left + bleft  - tright - 2.*right  - bright,
+                  -tleft - 2.*top  - tright + bleft  + 2.*bottom + bright);
     #elif OPERATOR==1
-    float x = 3.*tleft + 10.*left + 3.*bleft - 3.*tright - 10.*right - 3.*bright;
-    float y = 3.*tleft + 10.*top + 3.*tright - 3.*bleft - 10. * bottom - 3.*bright;
+    vec2 g = vec2(3.*tleft + 10.*left + 3.*bleft  - 3.*tright - 10.*right  - 3.*bright,
+                  3.*tleft + 10.*top  + 3.*tright - 3.*bleft  - 10.*bottom - 3.*bright);
     #endif
-
-    float transparency = sqrt(x * x + y * y);
 
     #if COLOR==0
     vec3 color = vec3(1.);
@@ -49,5 +43,5 @@ void main(){
     vec3 color = texture(DiffuseSampler, texCoord).rgb;
     #endif
     
-    fragColor = vec4(color * transparency, 1.0);
+    fragColor = vec4(color * length(g), 1.0);
 }
