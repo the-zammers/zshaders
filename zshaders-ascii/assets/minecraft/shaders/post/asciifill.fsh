@@ -1,7 +1,7 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
-uniform sampler2D TextData;
+uniform sampler2D InSampler;
+uniform sampler2D TextDataSampler;
 
 in vec2 texCoord;
 
@@ -22,12 +22,12 @@ void main() {
     vec2 fractOffset = fract(texCoord * rescaledInSize) * RescaleFactor;
     vec2 metapixelOffset = vec2(fractOffset.x / 8., 1. - fractOffset.y / 8.);
 
-    vec4 color = texture(DiffuseSampler, texCoord) * 1.4;
+    vec4 color = texture(InSampler, texCoord) * 1.4;
 
     float relativeBrightness = luminance(color.rgb);
     int symbolIndex = max(0, min(9, int(relativeBrightness * 10)));
     vec2 symbolLocation = vec2(symbolLocations[symbolIndex].yx);
-    vec4 symbol = texture(TextData, (symbolLocation + metapixelOffset) / vec2(16.));
+    vec4 symbol = texture(TextDataSampler, (symbolLocation + metapixelOffset) / vec2(16.));
 
     fragColor = vec4(symbol.a * color.rgb, 1.0);
 }

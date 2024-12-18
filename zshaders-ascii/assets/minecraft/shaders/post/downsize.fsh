@@ -1,6 +1,6 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 
@@ -19,7 +19,7 @@ vec3 getAverageColor(vec2 start) {
     
     for(int x = 0; x < RescaleFactor.x; x++) {
         for(int y = 0; y < RescaleFactor.y; y++) {
-            vec3 curr = texture(DiffuseSampler, start + vec2(x, y) * oneTexel).rgb;
+            vec3 curr = texture(InSampler, start + vec2(x, y) * oneTexel).rgb;
             r += curr.r * curr.r;
             g += curr.g * curr.g;
             b += curr.b * curr.b;
