@@ -1,11 +1,11 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 
 uniform vec2 InSize;
-uniform float Time;
+uniform float GameTime;
 
 out vec4 fragColor;
 
@@ -232,14 +232,14 @@ vec3 blendSoftLight(vec3 base, vec3 blend) {
 */
 
 void main() {
-    vec3 backgroundColor = texture2D(DiffuseSampler, texCoord).rgb;
+    vec3 backgroundColor = texture(InSampler, texCoord).rgb;
 
     float grainSize = 2.0;
-    float g = grain(texCoord, InSize / grainSize, Time*1000., 7.0);
+    float g = grain(texCoord, InSize / grainSize, GameTime*5000., 7.0);
     
     //blend the noise over the background, 
     //i.e. overlay, soft light, additive
-    vec3 color = mix(backgroundColor, vec3(g), 0.15);
+    vec3 color = mix(backgroundColor, vec3(g), 0.3);
     /*
     //get the luminance of the background
     float luminance = luma(backgroundColor);

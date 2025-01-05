@@ -1,6 +1,6 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 in vec2 positionnew;
@@ -26,7 +26,7 @@ const int hatch_y_offset = 5;
 void main() { 
   ivec2 uv = ivec2(floor(texCoord / oneTexel - 0.4 * InSize));
   
-    vec3 color = texture(DiffuseSampler, texCoord).rgb;
+    vec3 color = texture(InSampler, texCoord).rgb;
     float lum = length(color);
     vec3 tc = WHITE;
   

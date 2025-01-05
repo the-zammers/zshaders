@@ -1,6 +1,6 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 
@@ -22,7 +22,7 @@ vec4 getQuadrant(int minx, int maxx, int miny, int maxy, float n) {
 
     for(int x = minx; x <= maxx; x++) {
         for(int y = miny; y <= maxy; y++) {
-            vec3 c = texture(DiffuseSampler, texCoord + vec2(texelSize.x * x, texelSize.y * y)).rgb;
+            vec3 c = texture(InSampler, texCoord + vec2(texelSize.x * x, texelSize.y * y)).rgb;
             float l = luminance(c);
             luminanceSum += l;
             luminanceSum2 += l * l;

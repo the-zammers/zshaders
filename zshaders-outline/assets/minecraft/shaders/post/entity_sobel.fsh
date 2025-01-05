@@ -1,6 +1,6 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 in vec2 oneTexel;
@@ -15,7 +15,7 @@ out vec4 fragColor;
 // Based on the work by Forceflow on Shadertoy
 
 float getIntensityAt(vec2 offset) {
-    return length(texture(DiffuseSampler, texCoord + offset * oneTexel).rgb);
+    return length(texture(InSampler, texCoord + offset * oneTexel).rgb);
 }
 
 void main(){
@@ -40,7 +40,7 @@ void main(){
     #if COLOR==0
     vec3 color = vec3(1.);
     #elif COLOR==1
-    vec3 color = texture(DiffuseSampler, texCoord).rgb;
+    vec3 color = texture(InSampler, texCoord).rgb;
     #endif
     
     fragColor = vec4(color * length(g), 1.0);
