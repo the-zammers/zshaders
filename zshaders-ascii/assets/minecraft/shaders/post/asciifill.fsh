@@ -11,11 +11,11 @@ uniform vec2 RescaleFactor;
 out vec4 fragColor;
 
 float luminance(vec3 color) {
-    return dot(color, vec3(0.2126, 0.7152, 0.0722));
+    return dot(color, vec3(0.299, 0.587, 0.114));
 }
 
-// SPACE . ; c o P O ? @ BLOCK, indexed by row then column
-const ivec2 symbolLocations[10] = ivec2[](ivec2(0,0), ivec2(2, 14), ivec2(3, 11), ivec2(6, 3), ivec2(6, 15), ivec2(5,0), ivec2(4,15), ivec2(3,15), ivec2(4,0), ivec2(13,11));
+// SPACE . ; + c o $ O @ BLOCK, indexed by row then column
+const ivec2 symbolLocations[10] = ivec2[](ivec2(0,0), ivec2(2, 14), ivec2(3, 11), ivec2(15,6), ivec2(6, 3), ivec2(6, 15), ivec2(2,4), ivec2(4,15), ivec2(4,0), ivec2(13,11));
 
 void main() {
     vec2 rescaledInSize = InSize / RescaleFactor;

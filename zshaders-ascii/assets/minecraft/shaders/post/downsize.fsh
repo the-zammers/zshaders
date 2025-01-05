@@ -12,22 +12,18 @@ out vec4 fragColor;
 vec2 oneTexel = 1.0 / InSize;
 
 vec3 getAverageColor(vec2 start) {
-    float r = 0;
-    float g = 0;
-    float b = 0;
+    vec3 acc = vec3(0);
     int n   = 0;
     
     for(int x = 0; x < RescaleFactor.x; x++) {
         for(int y = 0; y < RescaleFactor.y; y++) {
             vec3 curr = texture(InSampler, start + vec2(x, y) * oneTexel).rgb;
-            r += curr.r * curr.r;
-            g += curr.g * curr.g;
-            b += curr.b * curr.b;
+            acc += curr * curr;
             n++;
         }
     }
 
-    return vec3(sqrt(r/n), sqrt(g/n), sqrt(b/n));
+    return sqrt(acc / n);
 }
 
 void main() {
