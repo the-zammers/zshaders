@@ -8,5 +8,16 @@
         { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
         { "name": "InSize",  "type": "float",     "count": 2,  "values": [ 1.0, 1.0 ] },
         { "name": "OutSize", "type": "float",     "count": 2,  "values": [ 1.0, 1.0 ] }
-    ]
+    ],
+
+    "__comment": "Available settings: LUM_THRESHOLD_{1-4} should all be values in the range (0.0,1.0] and in descending order, and define the luminance thresholds at which hatching patterns change; HATCH_SIZE is an integer defining the distance between major hatch lines.",
+    "defines": {
+        "values": {
+            "LUM_THRESHOLD_1": "1.0",
+            "LUM_THRESHOLD_2": "0.7",
+            "LUM_THRESHOLD_3": "0.5",
+            "LUM_THRESHOLD_4": "0.3",
+            "HATCH_SIZE": "10"
+        }
+    }
 }

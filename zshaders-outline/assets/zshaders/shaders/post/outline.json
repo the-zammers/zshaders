@@ -8,5 +8,14 @@
         { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
         { "name": "InSize",  "type": "float",     "count": 2,  "values": [ 1.0, 1.0 ] },
         { "name": "OutSize", "type": "float",     "count": 2,  "values": [ 1.0, 1.0 ] }
-    ]
+    ],
+
+    "__comment": "Available settings: OPERATOR sets the operator to either SOBEL or SCHARR (default); optional flag GREYSCALE disables color.",
+    "defines": {
+        "values": {
+            "OPERATOR": "SOBEL"
+        },
+        "flags": [
+        ]
+    }
 }

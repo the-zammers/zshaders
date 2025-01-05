@@ -8,7 +8,6 @@ uniform vec2 InSize;
 
 out vec4 fragColor;
 
-#define RADIUS 5
 vec2 texelSize = 1. / InSize;
 
 float luminance(vec3 color) {

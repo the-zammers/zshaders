@@ -7,11 +7,6 @@ in vec2 oneTexel;
 
 out vec4 fragColor;
 
-// 0 - Sobel Operator, 1 - Scharr Operator
-#define OPERATOR 0
-// 0 - grayscale, 1 - color
-#define COLOR 1
-
 // Based on the work by Forceflow on Shadertoy
 
 float getIntensityAt(vec2 offset) {
@@ -29,17 +24,17 @@ void main(){
     float right  = getIntensityAt(vec2( 1.,  0.));
     float bright = getIntensityAt(vec2( 1.,  1.));
 
-    #if OPERATOR==0
+    #if OPERATOR==SOBEL
     vec2 g = vec2( tleft + 2.*left + bleft  - tright - 2.*right  - bright,
                   -tleft - 2.*top  - tright + bleft  + 2.*bottom + bright);
-    #elif OPERATOR==1
+    #else
     vec2 g = vec2(3.*tleft + 10.*left + 3.*bleft  - 3.*tright - 10.*right  - 3.*bright,
                   3.*tleft + 10.*top  + 3.*tright - 3.*bleft  - 10.*bottom - 3.*bright);
     #endif
 
-    #if COLOR==0
+    #ifdef GREYSCALE
     vec3 color = vec3(1.);
-    #elif COLOR==1
+    #else
     vec3 color = texture(InSampler, texCoord).rgb;
     #endif
     
