@@ -65,7 +65,7 @@
             "output": "swap"
         },
         {
-            "program": "minecraft:post/kuwahara",
+            "program": "zshaders:post/kuwahara",
             "inputs": [
                 {
                     "sampler_name": "In",

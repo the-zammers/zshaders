@@ -64,7 +64,7 @@
             "output": "swap"
         },
         {
-            "program": "minecraft:post/entity_outline",
+            "program": "zshaders:post/outline",
             "inputs": [
                 {
                     "sampler_name": "In",

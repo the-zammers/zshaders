@@ -64,7 +64,7 @@
             "output": "swap"
         },
         {
-            "program": "minecraft:post/film_grain",
+            "program": "zshaders:post/film_grain",
             "inputs": [
                 {
                     "sampler_name": "In",

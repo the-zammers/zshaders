@@ -1,7 +1,7 @@
 {
     "targets" : {
-        "final": {},
-        "swap": {}
+        "swap": {},
+        "swap2": {}
     },
     "passes": [
         {
@@ -62,30 +62,30 @@
                     "use_depth_buffer": true
                 }
             ],
-            "output": "final"
+            "output": "swap"
         },
         {
-            "program": "minecraft:post/downsize",
+            "program": "zshaders:post/downsize",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "final"
+                    "target": "swap"
                 }
             ],
-            "output": "swap",
+            "output": "swap2",
             "uniforms": [
                 { "name": "RescaleFactor", "values": [ 6.0, 8.0 ] }
             ]
         },
         {
-            "program": "minecraft:post/asciifill",
+            "program": "zshaders:post/asciifill",
             "uniforms": [
                 { "name": "RescaleFactor", "values": [ 6.0, 8.0 ] }
             ],
             "inputs":  [
                 {
                     "sampler_name": "In",
-                    "target": "swap"
+                    "target": "swap2"
                 },
                 {
                     "sampler_name": "TextData",
@@ -93,16 +93,6 @@
                     "width": 1024,
                     "height": 1024,
                     "bilinear": true
-                }
-            ],
-            "output": "final"
-        },
-        {
-            "program": "minecraft:post/blit",
-            "inputs": [
-                {
-                    "sampler_name": "In",
-                    "target": "final"
                 }
             ],
             "output": "minecraft:main"

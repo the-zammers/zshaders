@@ -1,6 +1,6 @@
 {
     "vertex": "minecraft:post/blit",
-    "fragment": "minecraft:post/downsize",
+    "fragment": "zshaders:post/downsize",
     "samplers": [
         { "name": "InSampler" }
     ],

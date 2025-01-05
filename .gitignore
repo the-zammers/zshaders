@@ -4,3 +4,6 @@
 !docs/
 !.gitignore
 !README.md
+!LICENSE
+
+*/folder.json

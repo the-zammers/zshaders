@@ -1,6 +1,6 @@
 {
     "vertex": "minecraft:post/sobel",
-    "fragment": "minecraft:post/entity_sobel",
+    "fragment": "zshaders:post/outline",
     "samplers": [
         { "name": "InSampler" }
     ],

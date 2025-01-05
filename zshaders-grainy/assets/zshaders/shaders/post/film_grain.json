@@ -1,6 +1,6 @@
 {
     "vertex": "minecraft:post/blit",
-    "fragment": "minecraft:post/film_grain",
+    "fragment": "zshaders:post/film_grain",
     "samplers": [
         { "name": "InSampler" }
     ],

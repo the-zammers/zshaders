@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/sobel",
-    "fragment": "minecraft:post/crosshatch",
+    "vertex": "minecraft:post/blit",
+    "fragment": "zshaders:post/kuwahara",
     "samplers": [
         { "name": "InSampler" }
     ],

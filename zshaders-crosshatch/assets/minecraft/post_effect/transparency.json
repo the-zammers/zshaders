@@ -64,7 +64,7 @@
             "output": "swap"
         },
         {
-            "program": "minecraft:post/crosshatch",
+            "program": "zshaders:post/crosshatch",
             "inputs": [
                 {
                     "sampler_name": "In",

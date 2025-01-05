@@ -1,6 +1,6 @@
 {
     "vertex": "minecraft:post/blit",
-    "fragment": "minecraft:post/asciifill",
+    "fragment": "zshaders:post/asciifill",
     "samplers": [
         { "name": "InSampler" },
         { "name": "TextDataSampler" }
